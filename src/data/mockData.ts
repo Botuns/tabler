@@ -1,4 +1,6 @@
-export const statsData = [
+import { StatsItem, Commit, ChartData } from '../types/dashboard';
+
+export const initialStatsData: StatsItem[] = [
   {
     title: "New Tickets",
     value: "43",
@@ -31,7 +33,7 @@ export const statsData = [
   },
 ];
 
-export const commitData = [
+export const initialCommitData: Commit[] = [
   {
     user: {
       name: "Ronald Bradley",
@@ -58,7 +60,7 @@ export const commitData = [
   },
 ];
 
-export const chartData = {
+export const initialChartData: ChartData = {
   pieChart1: [
     { name: "Group A", value: 37, color: "#4CAF50" },
     { name: "Group B", value: 25, color: "#2196F3" },

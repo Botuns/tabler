@@ -1,14 +1,31 @@
-import { BellIcon, Terminal } from "lucide-react";
+import { BellIcon, Loader, Terminal } from "lucide-react";
 import { Card } from "@/components/ui/card";
-
-import { statsData, commitData, chartData } from "../data/mockData";
 import { StatsCard } from "../components/components-stats-card";
 import { ActivityChart } from "../components/components-activity-chart";
 import { CommitHistory } from "../components/components-commit-history";
 import { CircularCharts } from "../components/components-circular-charts";
 import SubNav from "../components/sub-nav";
+import {
+  useCharts,
+  useCommits,
+  useIsLoading,
+  useStats,
+} from "@/store/hooks/useDashboardHooks";
 
 export default function Dashboard() {
+  const stats = useStats();
+  const commits = useCommits();
+  const charts = useCharts();
+  const loading = useIsLoading();
+
+  // const handleUpdateStat = (index: number) => {
+  //   updateStat(index, { value: "44", change: 7 });
+  // };
+  if (loading) {
+    <div className="flex justify-center items-center text-center h-screen">
+      <Loader />
+    </div>;
+  }
   return (
     <div className="min-h-screen bg-blue-50 overflow-hidden">
       {/* Navigation */}
@@ -54,7 +71,7 @@ export default function Dashboard() {
 
         {/* Stats Grid */}
         <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-          {statsData.map((stat, index) => (
+          {stats.map((stat, index) => (
             <StatsCard key={index} {...stat} />
           ))}
         </div>
@@ -64,7 +81,7 @@ export default function Dashboard() {
           {/* Activity Chart */}
           <Card className="p-6">
             <ActivityChart />
-            <CommitHistory commits={commitData} />
+            <CommitHistory commits={commits} />
           </Card>
 
           {/* Right Column */}
@@ -78,7 +95,7 @@ export default function Dashboard() {
                 with code samples.
               </div>
             </Card>
-            <CircularCharts data={chartData} />
+            <CircularCharts data={charts} />
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <Card className="p-6">
                 <h3 className="mb-4 text-lg font-medium text-center">
