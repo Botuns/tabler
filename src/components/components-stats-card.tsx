@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { ArrowUpIcon, ArrowDownIcon } from "lucide-react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 interface StatsCardProps {
   title: string;
@@ -12,18 +12,19 @@ export function StatsCard({ title, value, change }: StatsCardProps) {
 
   return (
     <Card className="p-4 text-center">
-      <div className="flex items-center justify-between ">
+      <div className="flex items-center justify-end ">
         <span
-          className={`text-xs  ${
+          className={`text-xs font-bold ${
             isPositive ? "text-green-500" : "text-red-500"
           }`}
         >
-          {isPositive ? (
-            <ArrowUpIcon className="h-4 w-4 inline" />
-          ) : (
-            <ArrowDownIcon className="h-4 w-4 inline" />
-          )}
+          {isPositive ? "+" : "-"}
           {Math.abs(change)}%
+          {isPositive ? (
+            <ChevronUp className="h-4 w-4 inline" />
+          ) : (
+            <ChevronDown className="h-4 w-4 inline" />
+          )}
         </span>
       </div>
       <div className="mt-2 text-2xl font-semibold">{value}</div>
